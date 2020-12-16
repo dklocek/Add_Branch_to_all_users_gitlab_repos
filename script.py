@@ -17,6 +17,9 @@ for i in range(1, len(sys.argv)):
         source_branch = cl_data[i+1]
 
 r = requests.get('https://www.gitlab.com/api/v4/users/' + user_id + '/projects', data={'PRIVATE-TOKEN': token})
+print(r.status_code)
+if r.status_code != 200:
+    exit("Error while connecting to API \n Check UserID, AccessToken oe your Internet connection")
 jr = tuple(r.json())
 i = 0
 ids = []
