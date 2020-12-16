@@ -32,9 +32,14 @@ for project in response:
     ids.append(project['id'])
     d[project['id']] = project['name']
 
-print("Trying to make branches")
-for project_id in ids:
-    if(requests.post('https://www.gitlab.com/api/v4/projects/' + str(project_id) + '/repository/branches',
-                     headers={'PRIVATE-TOKEN': token},
-                     data={'branch': branch_name, 'ref': source_branch}).status_code) == 201:
-        print("Created branch " + branch_name + " in project " + d[project_id])
+if len(ids) > 0:
+    print("Trying to make branches")
+    for project_id in ids:
+        if(requests.post('https://www.gitlab.com/api/v4/projects/' + str(project_id) + '/rpository/branches',
+                         headers={'PRIVATE-TOKEN': token},
+                         data={'branch': branch_name, 'ref': source_branch}).status_code) == 201:
+            print("Created branch " + branch_name + " in project " + d[project_id])
+        else:
+            print("Something went wrong. Check if branch already exist")
+else:
+    print("No projects found!!!")
