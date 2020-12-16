@@ -40,6 +40,6 @@ if len(ids) > 0:
                          data={'branch': branch_name, 'ref': source_branch}).status_code) == 201:
             print("Created branch " + branch_name + " in project " + d[project_id])
         else:
-            print("Something went wrong. Check if branch already exist")
+            exit("Something went wrong. Check if branch already exist")
 else:
-    print("No projects found!!!")
+    exit("No projects found!!!")
