@@ -31,4 +31,4 @@ for project_id in ids:
     print(
         requests.post('https://www.gitlab.com/api/v4/projects/' + str(project_id) + '/repository/branches',
                       headers={'PRIVATE-TOKEN': token},
-                      data={'branch': branch_name, 'ref': source_branch}).json())
+                      data={'branch': branch_name, 'ref': source_branch}).status_code)
