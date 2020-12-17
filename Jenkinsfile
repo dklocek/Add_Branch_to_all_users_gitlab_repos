@@ -4,7 +4,7 @@ pipeline {
     parameters {
         string(name: 'name', defaultValue: 'NewBranch', description: 'Name of new branch')
         string(name: 'source', defaultValue: 'master', description: 'Source for new branch')
-        string(server: 'server', defaultValue: 'https://gitlab.com', description: 'GitLab Server URL')
+        string(name: 'server', defaultValue: 'https://gitlab.com', description: 'GitLab Server URL')
         booleanParam(name: 'add', defaultValue: true, description: 'True - ADD, False - REMOVE')
 
     }
