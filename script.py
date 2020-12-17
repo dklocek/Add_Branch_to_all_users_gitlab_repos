@@ -9,7 +9,7 @@ branch_name = "NewBranch"
 source_branch = "master"
 cl_data = sys.argv
 add = True
-
+print("Debug data:\n token type : " + type(token))
 for i in range(1, len(sys.argv)):
     if cl_data[i] == '-id':
         user_id = cl_data[i + 1]
