@@ -67,8 +67,10 @@ def remove_branches(server, token, branch_name, projects_list):
                      "Check your server url (if www.gitlab.com be sure to use https:// instead of http://)")
             elif response.status_code == 401:
                 exit("401 - Authorization error, check if your token has needed access rights")
+            elif response.status_code == 404:
+                print("Branch " + branch_name + " didn't exist in project " + projects_list[project])
             else:
-                exit("Something went wrong. \n " + str(response.json()))
+                exit("Something went wrong. \n ")
     else:
         exit("No projects found!!!")
 
