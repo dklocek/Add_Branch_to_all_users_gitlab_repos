@@ -2,7 +2,7 @@ from user_help import *
 from actions import *
 import sys
 
-server = "https://www.gitlab.com"
+server = "https://gitlab.com"
 user_id = ''
 token = ''
 branch_name = "NewBranch"
@@ -26,6 +26,17 @@ for i in range(1, len(sys.argv)):
         user_help()
     elif cl_data[i] == '-remove' or cl_data[i] == '-r':
         add = False
+
+if user_id == '':
+    exit("Provide GitLab User ID\n type -help or -h for help")
+if token == '':
+    exit("Provide Access Token \n type -help or -h for help")
+if branch_name == "NewBranch":
+    print('Using "NewBranch" as name for creating branches')
+if source_branch == "master" and add:
+    print('Using "master" as a source for creating branches')
+if server == "https://gitlab.com":
+    print('Using "https://gitlab.com" as GitLab server for creating branches')
 
 response = connect(server, user_id, token)
 projects = get_projects(response)
