@@ -4,19 +4,32 @@ pipeline {
     parameters {
         string(name: 'name', defaultValue: 'NewBranch', description: 'Name of new branch')
         string(name: 'source', defaultValue: 'master', description: 'Source for new branch')
+        string(name: 'server', defaultValue: 'https://gitlab.com', description: 'GitLab Server URL')
+        booleanParam(name: 'add', defaultValue: true, description: 'True - ADD, False - REMOVE')
 
     }
-
+// when{ expression { params.action == 'apply'}}
     stages {
-        stage('Hello') {
-            environment {
-                GL_TOKEN = credentials('GITLAB_TOKEN')
-                GL_UID = credentials('GITLAB_UID')
-            }
-            steps {
-                git url: 'https://github.com/dklocek/Add_Branch_to_all_users_gitlab_repos.git'
-                sh 'python3 script.py -id $GL_UID -t $GL_TOKEN -n ${name} -sb ${source}'
-            }
+        stage('ADD BRANCH') {
+            when{ expression { params.add }}
+                environment {
+                    GITLAB_TOKEN = credentials('GITLAB_TOKEN')
+                    GL_UID = credentials('GITLAB_UID')
+                }
+                steps {
+                    sh 'python3 script.py -s ${server} -id $GL_UID -n ${name} -sb ${source}'
+                }
         }
+
+        stage('REMOVE BRANCH') {
+            when{ expression { !params.add }}
+                environment {
+                    GITLAB_TOKEN = credentials('GITLAB_TOKEN')
+                    GL_UID = credentials('GITLAB_UID')
+                    }
+                    steps {
+                        sh 'python3 script.py -remove -s ${server} -id $GL_UID -n ${name}'
+                    }
+                }
     }
 }

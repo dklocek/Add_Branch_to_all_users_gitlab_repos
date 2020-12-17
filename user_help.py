@@ -1,6 +1,9 @@
 def user_help():
     print("Welcome, I'm happy that You are using this script. there is some help: \n\n"
           "You can add or remove branches from all your repositories at Gitlab \n\n"
+          "IF ACCESS TOKEN IS PROVIDED BY 'GITLAB_TOKEN' SYSTEM VARIABLE \n"
+          "ACCESS TOKEN IS NOT REQUIRED!!!!\n"
+          "RECOMMENDED FOR SAFETY REASONS eg. in Pipelines\n\n"
           "Syntax: \n\n"
           "Adding Branches \n\n"
           "script.py -s <server URL> -id <user ID> -t <Access Token -n <new branch name> -sb <source branch name> \n\n"

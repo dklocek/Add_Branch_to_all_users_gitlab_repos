@@ -39,16 +39,17 @@ def add_branches(server, token, branch_name, source_branch, projects_list):
             response = requests.post(server + '/api/v4/projects/' + str(project) + '/repository/branches',
                                      headers={'PRIVATE-TOKEN': token},
                                      data={'branch': branch_name, 'ref': source_branch})
-
             if response.status_code == 201:
                 print("Created branch " + branch_name + " in project " + projects_list[project])
             elif response.status_code == 200:
                 exit("Got response 200 instead of 201 \n"
                      "Check your server url (if www.gitlab.com be sure to use https:// instead of http://)")
+            elif response.status_code == 400:
+                print(branch_name + " probably exist already in project " + projects_list[project])
             elif response.status_code == 401:
                 exit("401 - Authorization error, check if your token has needed access rights")
             else:
-                exit("Something went wrong. Check if branch already exist")
+                exit("Something went wrong. Code:" + str(response.status_code))
     else:
         exit("No projects found!!!")
 
@@ -70,7 +71,7 @@ def remove_branches(server, token, branch_name, projects_list):
             elif response.status_code == 404:
                 print("Branch " + branch_name + " didn't exist in project " + projects_list[project])
             else:
-                exit("Something went wrong. \n ")
+                exit("Something went wrong. Code:" + str(response.status_code))
     else:
         exit("No projects found!!!")
 

@@ -2,6 +2,9 @@ Project stack:
 - <i> GitLab API </i>
 - <i> Python basics + requests </i>
 
+<b> Access Token can be provided by system variable 'GITLAB_TOKEN', if so, -token is no longer required.</b>
+<b> Recommend for safety reasons eg. in pipelines</b> 
+
 Entrypoint: script.py
 
 Script can add or remove branches from all repositories of specified user in Gitlab

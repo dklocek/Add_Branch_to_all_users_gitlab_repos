@@ -1,14 +1,13 @@
 from user_help import *
 from actions import *
 import sys
-
+import os
 server = "https://gitlab.com"
 user_id = ''
-token = ''
+token = os.getenv('GITLAB_TOKEN')
 branch_name = "NewBranch"
 source_branch = "master"
 cl_data = sys.argv
-
 add = True
 
 for i in range(1, len(sys.argv)):
@@ -29,7 +28,7 @@ for i in range(1, len(sys.argv)):
 
 if user_id == '':
     exit("Provide GitLab User ID\n type -help or -h for help")
-if token == '':
+if token == '' or token is None:
     exit("Provide Access Token \n type -help or -h for help")
 if branch_name == "NewBranch":
     print('Using "NewBranch" as name for creating branches')
